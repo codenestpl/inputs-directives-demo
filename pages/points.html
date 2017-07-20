@@ -1,0 +1,47 @@
+<div class="jumbotron text-center">
+  <h2>Add some route points in random order</h2>   
+</div>
+
+<div class="container"> 
+  <h3>Points list:</h3>            
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Place or Adress</th>
+        <th>Geo:</th> 
+        <th class="text-right">Action:</th> 
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="point in points track by $index">
+        <td>{{point.address}}</td> 
+
+        <td ng-if="!point.toEdit">
+          <i class="fa fa-check-circle-o"></i>
+        </td> 
+        <td ng-if="point.toEdit">
+          <i class="fa fa-times-circle-o"></i> 
+          <small>Please correct the point address</small> 
+        </td> 
+        <td class="text-right">
+          <button class="btn btn-danger" ng-click="deletePoint( $index)">
+           <i class="fa fa-trash"></i> Delete
+          </button>
+          <button ng-if="point.toEdit" class="btn btn-warning" ng-click="editPoint( $index)"><i class="fa fa-pencil"></i> Edit</button>
+        </td>      
+      </tr> 
+      <tr >    
+        <form>
+          <td ng-show="points.length < 4"><input ng-model="pointAddress" type="text" class="form-control" id="address" placeholder="Address..."> </td>           
+          <td></td>
+          <td  ng-show="points.length < 4"  class="text-right">
+            <button ng-click="addPoint()" class="btn btn-primary">
+            <i class="fa fa-plus-square"></i> Add
+            </button>
+          </td> 
+        </form>     
+      </tr> 
+    </tbody>
+  </table> 
+</div>

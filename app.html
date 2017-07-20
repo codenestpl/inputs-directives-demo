@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<!-- define angular app -->
+<html ng-app="routeApp">
+
+<head>
+  <!-- SCROLLS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" />
+
+  <!-- SPELLS -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+  <script src="http://maps.google.com/maps/api/js"></script>
+  <script src="/node_modules/ngmap/build/scripts/ng-map.min.js"></script>
+  <script src="assets/dragdrop.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<!-- define angular controller -->
+<body ng-controller="mainController">
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/"><i class="fa fa-tachometer" aria-hidden="true"></i> Google Maps Optimaze Route App</a>
+      </div>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#/!"><i class="fa fa-home"></i> About</a></li>
+        <li><a href="#!points"><i class="fa fa-map-marker"></i> Points</a></li>
+        <li><a href="#!routes"><i class="fa fa-taxi"></i> Optimaze</a></li> 
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+
+       <div class="col-sm-6">
+
+           <map zoom="10" center="[{{mapCenter[0]}}, {{mapCenter[1]}}]">
+             <marker 
+              ng-repeat="point in points track by $index"
+              ng-if="point.location.length " 
+              position="{{point.location}}" 
+              centered="true"
+              >
+              <directions 
+              ng-if="point.location.length " 
+              draggable="false"
+              panel="directions-panel"
+              travel-mode="WALKING"
+              waypoints="{{wayPointsArray}}"
+              origin="{{startPoint}}"
+              destination="{{endPoint}}">
+        </directions>
+           </map>
+ 
+        </div>
+
+        <main class="col-sm-6"> 
+          <div ng-view></div>         
+        </main>
+
+    </div>
+  </div>
+ 
+ 
+
+  
+  
+  <footer class="text-center footer">
+    <p>Code sample created by <a href="http://codenest.pl">Codenest.pl</a></p>   
+  </footer>
+  
+</body>
+
+</html>
