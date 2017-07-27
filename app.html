@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 
 <!-- define angular app -->
-<html ng-app="routeApp">
+<html ng-app="app">
 
 <head>
   <!-- SCROLLS -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" />
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" />
 
   <!-- SPELLS -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
-  <script src="http://maps.google.com/maps/api/js"></script>
-  <script src="/node_modules/ngmap/build/scripts/ng-map.min.js"></script>
-  <script src="assets/dragdrop.js"></script>
+   
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
   <script src="app.js"></script>
 </head>
 
@@ -24,45 +21,53 @@
   <nav class="navbar navbar-default">
     <div class="container">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/"><i class="fa fa-tachometer" aria-hidden="true"></i> Google Maps Optimaze Route App</a>
-      </div>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#/!"><i class="fa fa-home"></i> About</a></li>
-        <li><a href="#!points"><i class="fa fa-map-marker"></i> Points</a></li>
-        <li><a href="#!routes"><i class="fa fa-taxi"></i> Optimaze</a></li> 
-      </ul>
+        <a class="navbar-brand" href="/"><i class="fa fa-share" aria-hidden="true"></i> Form inputs directives demoddd </a>
+      </div> 
     </div>
   </nav>
 
   <div class="container">
     <div class="row">
 
-       <div class="col-sm-6">
-
-           <map zoom="10" center="[{{mapCenter[0]}}, {{mapCenter[1]}}]">
-             <marker 
-              ng-repeat="point in points track by $index"
-              ng-if="point.location.length " 
-              position="{{point.location}}" 
-              centered="true"
-              >
-              <directions 
-              ng-if="point.location.length " 
-              draggable="false"
-              panel="directions-panel"
-              travel-mode="WALKING"
-              waypoints="{{wayPointsArray}}"
-              origin="{{startPoint}}"
-              destination="{{endPoint}}">
-        </directions>
-           </map>
- 
+      <form>
+        <!--TEXT-->
+        <div class="form-group">
+            <ng-input 
+            label="Text label" 
+            ng-model="textinput" 
+            type="text" 
+            name="name"
+            placeholder="Your name" 
+            required> </ng-input> 
         </div>
 
-        <main class="col-sm-6"> 
-          <div ng-view></div>         
-        </main>
+        <!--NUMBER-->
+        <div class="form-group">
+            <ng-input 
+            label="Number label" 
+            ng-model="numberinput" 
+            type="number" 
+            name="age"
+            placeholder="Your age"
+            min="0"
+            max="10"
+            step="1"
+            custombuttons
+            required> </ng-input> 
+        </div>  
+        
+        <!--TEXTAREA-->
+        <div class="form-group">
+            <ng-textarea
+            label="Text label" 
+            ng-model="textarea" 
+            type="text" 
+            name="name"
+            placeholder="Your name" 
+            required> </ng-textarea> 
+        </div>
+        <small>Text input: {{textinput}}, Number input: {{numberinput}}, Textarea: {{textarea}}</small>
+      </form>
 
     </div>
   </div>
